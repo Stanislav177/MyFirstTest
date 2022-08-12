@@ -8,7 +8,10 @@ import com.example.myfirsttest.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
+
     private val emailValidator = EmailValidator()
+
+    private val emailValidatorPattern = EmailValidatorImplPattern()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,14 +19,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         with(binding) {
-            editTextTextEmailAddress.addTextChangedListener(emailValidator)
+            editTextTextEmailAddress.addTextChangedListener(emailValidatorPattern)
 
             btnSave.setOnClickListener {
                 when {
-                    emailValidator.isValid -> {
+                    emailValidatorPattern.isValid -> {
                         Toast.makeText(this@MainActivity, "OK", Toast.LENGTH_LONG).show()
                     }
-                    emailValidator.text == null -> {
+                    emailValidatorPattern.text == null -> {
                         editTextTextEmailAddress.error = getString(R.string.error_email_null)
                     }
                     else -> {
