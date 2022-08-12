@@ -19,11 +19,16 @@ class MainActivity : AppCompatActivity() {
             editTextTextEmailAddress.addTextChangedListener(emailValidator)
 
             btnSave.setOnClickListener {
-                if (emailValidator.isValid) {
-                    Toast.makeText(this@MainActivity, "OK", Toast.LENGTH_LONG).show()
-                } else {
-                    val errorEmail = getString(R.string.error_email)
-                    editTextTextEmailAddress.error = errorEmail
+                when {
+                    emailValidator.isValid -> {
+                        Toast.makeText(this@MainActivity, "OK", Toast.LENGTH_LONG).show()
+                    }
+                    emailValidator.text == null -> {
+                        editTextTextEmailAddress.error = getString(R.string.error_email_null)
+                    }
+                    else -> {
+                        editTextTextEmailAddress.error = getString(R.string.error_email)
+                    }
                 }
             }
         }

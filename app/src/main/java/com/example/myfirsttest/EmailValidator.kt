@@ -7,13 +7,15 @@ import java.util.regex.Pattern
 class EmailValidator : TextWatcher {
 
     internal var isValid = false
+    var text: String? = null
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
 
     override fun afterTextChanged(s: Editable?) {
-        isValid = isValidEmail(s)
+        text = isNullText(s.toString())
+        isValid = isValidEmail(text)
     }
 
     companion object {
@@ -26,6 +28,10 @@ class EmailValidator : TextWatcher {
                     "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
                     ")+"
         )
+
+        fun isNullText(email: String?): String? {
+            return email
+        }
 
         fun isValidEmail(email: CharSequence?): Boolean {
             return email != null && PATTERN_EMAIL.matcher(email).matches()
