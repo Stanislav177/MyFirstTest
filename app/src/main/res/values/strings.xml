@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">My First Test</string>
+    <string name="error_email">Ошибка в email</string>
+    <string name="error_email_null">NUll</string>
 </resources>
